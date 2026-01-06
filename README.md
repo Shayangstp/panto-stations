@@ -1,73 +1,87 @@
-# React + TypeScript + Vite
+# PANTOhealth Frontend Assignment — Train Stations Map
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A frontend application that visualizes train stations in Germany on an interactive Leaflet map.  
+This project was built as part of the **PANTOhealth Frontend Assignment**, focusing on clean React architecture, data handling, and user interaction.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Demo
 
-## React Compiler
+🔗 **Live URL:**  
+https://panto-stations.vercel.app/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Local Development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+http://localhost:5173
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Features
+
+- Fetches train station data from a remote API
+- Displays stations on an interactive **Leaflet map**
+- Map centered on **Germany** by default
+- Each station displayed as a map marker
+- Filter stations by **city** (search input or dropdown)
+- Station list synchronized with map markers
+- Clicking a station:
+  - Highlights it in the list
+  - Zooms and centers the map on the selected station
+- Proper handling of **loading** and **error** states
+- Includes **unit testing**
+- Fully deployed and production-ready
+
+---
+
+## Tech Stack
+
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- Leaflet / react-leaflet
+- Vitest + Testing Library
+- GitHub + Vercel (Deployment)
+
+---
+
+## Project Structure
+
+```txt
+src/
+  features/
+    stations/
+      components/      # Map, list, filter UI
+      hooks/           # Data fetching logic
+      utils/           # Filtering & helpers
+      api.ts           # API access
+      types.ts         # Domain types
+  shared/
+    layout/            # App layout
+    leafletIconFix.ts # Leaflet marker fix
+  test/                # Test setup
+  App.tsx
+  main.tsx
+  index.css
 ```
+---
+
+## Design Decisions
+
+```txt
+Local component state for simplicity and clarity
+
+Derived state for filtered results
+
+Feature-based folder structure for scalability
+
+Leaflet marker icon fix included for Vite compatibility
+
+Minimal and accessible UI using Tailwind CSS
